@@ -1,0 +1,65 @@
+@import "../../../shared.scss";
+$url_schlogologin: url(../../../#{$url_base}/schoolIcon.png);
+.login-container {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .login-form-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    padding-bottom: 50px;
+    border-radius: 10px;
+    .profile-pic {
+      position: absolute;
+      margin-top: 20px;
+      flex-grow: 1;
+      flex-shrink: 1;
+      justify-content: center;
+      background-image: $url_schlogologin;
+      background-repeat: no-repeat;
+      background-size: 155px 155px;
+      background-position: center;
+      height: 155px;
+      width: 100%;
+      border-radius: 50%;
+    }
+    .login-form {
+      border-radius: 5px;
+      background-color: $white;
+      margin-top: 130px;
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+        flex-shrink: 1;
+        margin: 100px 40px 10px 40px;
+        mat-form-field{
+          min-width: 300px;
+        }
+        button {
+          margin-top: 30px;
+          background: $color_flame_pea_approx;
+          color: $white;
+          &:hover {
+            background: $color_mojo_approx;
+            transition: 0.5s all;
+          }
+        }
+        p {
+          display: flex;
+          flex-direction: row;
+          flex-flow: space-between;
+          a:last-child {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

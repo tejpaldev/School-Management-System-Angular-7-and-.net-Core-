@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  <mat-table #feeTable [dataSource]="feeData">
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>Sr. No.</mat-header-cell>
+      <mat-cell *matCellDef="let row;let i = index">{{ i+1 }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="feetype">
+      <mat-header-cell *matHeaderCellDef>Fee Type</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.FeeType }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="feedate">
+      <mat-header-cell *matHeaderCellDef>Fee Date</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.FeeDate|date }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Amount }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="discount">
+      <mat-header-cell *matHeaderCellDef>Discount</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Discount }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="fine">
+      <mat-header-cell *matHeaderCellDef>Fine</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Fine }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comment">
+      <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Comment }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="checknumber">
+      <mat-header-cell *matHeaderCellDef>Check Number</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.CheckNumber==0 ? "" : row.CheckNumber}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="clearencedate">
+      <mat-header-cell *matHeaderCellDef>Clearence Date</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.ClearenceDate }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="transactionno">
+      <mat-header-cell *matHeaderCellDef>Transaction No</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.TransactionNo }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="paymentmode">
+      <mat-header-cell *matHeaderCellDef>Mode</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.PaymentMode }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="feeColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: feeColumns;"></mat-row>
+  </mat-table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+</div>

@@ -1,0 +1,54 @@
+@import '../../../shared.scss';
+mat-form-field{
+    padding: 5px;
+}
+
+.country-code{
+    width: 25px;
+}
+.register-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+// .register-container {
+//     align-items: center;
+//     display: flex;
+//     flex-direction: column;
+//     .register{
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         position: relative;
+//         margin-top: 50px;
+//         margin-bottom: 50px;
+//         .register-form{
+//             background-color: $white;
+//             border-radius: 5px;
+//             display: flex;
+//             flex-direction: column;
+//             align-items: center;
+//             h2 {
+//                 font-size: 26px;
+//                 margin-bottom: 30px;
+//                 font-weight: 500;
+//             }
+//             form{
+//                 display: -webkit-flex;
+//                 display: flex;
+//                 flex-direction: column;
+//                 align-items: center;
+//                 margin: 0 40px 40px 40px;
+//                 button {
+//                     background: $color_flame_pea_approx;
+//                     color: $white;
+//                     &:hover {
+//                         background: $color_mojo_approx;
+//                         transition: 0.5s all;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }

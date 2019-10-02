@@ -1,0 +1,63 @@
+<div class="class-config-container">
+  <button mat-fab [matMenuTriggerFor]="mainMenu" color="primary">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mainMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="classMenu">Class</button>
+    <button mat-menu-item [matMenuTriggerFor]="sectionMenu">Section</button>
+    <button mat-menu-item [matMenuTriggerFor]="streamMenu">Stream</button>
+    <a mat-menu-item [routerLink]="['/config']">
+      <mat-icon>keyboard_backspace</mat-icon>
+      <span>Back</span>
+    </a>
+  </mat-menu>
+  <mat-menu #classMenu="matMenu">
+    <button mat-menu-item (click)="addClass()">
+      <mat-icon>add</mat-icon>
+      <span>Add Class</span>
+    </button>
+    <button mat-menu-item (click)="deleteClass()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Class</span>
+    </button>
+    <button mat-menu-item (click)="addClassSection()">
+      <mat-icon>add</mat-icon>
+      <span>Add Class Section</span>
+    </button>
+    <button mat-menu-item (click)="deleteClassSection()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Class Section</span>
+    </button>
+    <button mat-menu-item (click)="addClassStream()">
+      <mat-icon>add</mat-icon>
+      <span>Add Class Stream</span>
+    </button>
+    <button mat-menu-item (click)="deleteClassStream()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Class Stream</span>
+    </button>
+  </mat-menu>
+  <mat-menu #sectionMenu="matMenu">
+    <button mat-menu-item (click)="addSection()">
+      <mat-icon>add</mat-icon>
+      <span>Add Section</span>
+    </button>
+    <button mat-menu-item (click)="deleteSection()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Section</span>
+    </button>
+  </mat-menu>
+  <mat-menu #streamMenu="matMenu">
+    <button mat-menu-item (click)="addStream()">
+      <mat-icon>add</mat-icon>
+      <span>Add Stream</span>
+    </button>
+    <button mat-menu-item (click)="deleteStream()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Stream</span>
+    </button>
+  </mat-menu>
+  <school-class *ngIf="isClass" [option]="classOption"></school-class>
+  <school-section *ngIf="isSection" [option]="sectionOption"></school-section>
+  <school-stream *ngIf="isStream" [option]="streamOption"></school-stream>
+</div>

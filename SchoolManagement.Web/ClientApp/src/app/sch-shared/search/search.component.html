@@ -1,0 +1,84 @@
+<div fxLayout="column">
+  <h1 mat-dialog-title>{{data.name}}</h1>
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="10px" style="padding: 10px;">
+    <form class="mat-elevation-z8" style="padding: 5px;" [formGroup]="searchForm" (ngSubmit)="search()">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Registration Number" formControlName="registrationno">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Admission Number" formControlName="admissionno">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Student Name" formControlName="studentname">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Class" formControlName="class" #classSelect="matSelect">
+            <mat-option *ngFor="let class of classes" [value]="class.Id">
+              {{ class.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dateofbirth" readonly="true">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Parent contact number" formControlName="contact">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button style="margin: 10px" type="submit" color="primary">Search</button>
+        <button mat-raised-button (click)="reset()" type="button" color="primary">Reset</button>
+      </div>
+    </form>
+    <mat-table class="mat-elevation-z8" style="padding: 5px;" #table [dataSource]="studentData" *ngIf="resultsLength>0">
+      <ng-container matColumnDef="registrationno">
+        <mat-header-cell *matHeaderCellDef>Registration No</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.RegistrationNo }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="admissionno">
+        <mat-header-cell *matHeaderCellDef>Admission No</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.AdmissionNo }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.Middlename ? row.Firstname + " " + row.Middlename + " " + row.Lastname : row.Firstname + " " + row.Lastname}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dateofbirth">
+        <mat-header-cell *matHeaderCellDef>Date Of Birth</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Dateofbirth | date }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="class">
+        <mat-header-cell *matHeaderCellDef>Class</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Class }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="section">
+        <mat-header-cell *matHeaderCellDef>Section</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Section }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="stream">
+        <mat-header-cell *matHeaderCellDef>Stream</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Stream }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="view">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="select(row)" color="primary">Select</button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+      <mat-paginator [length]="resultsLength" [pageSize]="10">
+      </mat-paginator>
+    </mat-table>
+  </div>
+  <div mat-dialog-actions fxFlexAlign="flex-end">
+    <button mat-raised-button (click)="cancel()" cdkFocusInitial color="primary">Cancel</button>
+  </div>
+</div>

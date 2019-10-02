@@ -1,0 +1,88 @@
+<div class="register-container">
+    <h2>Register Account</h2>
+</div>
+<!-- <form [formGroup]="formGroup" (ngSubmit)="register()">
+    <mat-horizontal-stepper [linear]="isLinear" formArrayName="formArray" #registerStepper>
+        <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+            <ng-template matStepLabel>Fill out your user details</ng-template>
+            <mat-form-field>
+                <input matInput placeholder="User name" formControlName="username" required>
+                <mat-error *ngIf="formArray.get([0]).controls['username'].hasError('pattern')">
+                    Please enter a valid username
+                </mat-error>
+                <mat-error *ngIf="formArray.get([0]).controls['username'].hasError('required')">
+                    Username is
+                    <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Email address" formControlName="email" required>
+                    <mat-error *ngIf="formArray.get([0]).controls['email'].hasError('pattern')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="formArray.get([0]).controls['email'].hasError('required')">
+                        Email address is
+                        <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="country-code">
+                    <input matInput readonly value="+91">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Contact" formControlName="contact" required>
+                    <mat-hint align="end">{{formArray.get([0]).controls['contact'].value.length}} / 10</mat-hint>
+                    <mat-error *ngIf="formArray.get([0]).controls['contact'].hasError('pattern')">
+                        Please enter a valid mobile number
+                    </mat-error>
+                    <mat-error *ngIf="formArray.get([0]).controls['contact'].hasError('required')">
+                        Mobile number is
+                        <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperNext type="button">Next</button>
+            </div>
+        </mat-step>
+        <mat-step formGroupName="1" [stepControl]="formArray.get([1])">
+            <ng-template matStepLabel>Fill out your security</ng-template>
+            <mat-form-field>
+                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                <i class="material-icons" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</i>
+                <mat-error *ngIf="formArray.get([1]).controls['password'].hasError('pattern')">
+                    Please enter a valid password
+                </mat-error>
+                <mat-error *ngIf="formArray.get([1]).controls['password'].hasError('required')">
+                    Password is
+                    <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'" formControlName="confirmpassword" required>
+                    <i class="material-icons" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</i>
+                    <mat-error *ngIf="formArray.get([1]).controls['confirmpassword'].hasError('pattern')">
+                        Please enter a confirm password
+                    </mat-error>
+                    <mat-error *ngIf="formArray.get([1]).controls['confirmpassword'].hasError('required')">
+                        Confirm password is
+                        <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-button type="submit">Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <div>
+                <button mat-button type="button" (click)="done()">Done</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</form> -->

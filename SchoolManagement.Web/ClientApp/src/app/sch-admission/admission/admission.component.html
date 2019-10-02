@@ -1,0 +1,316 @@
+<mat-horizontal-stepper linear #admissionStepper>
+  <mat-step [stepControl]="studentFormGroup" editable="true">
+    <ng-template matStepLabel>Student Details</ng-template>
+    <form [formGroup]="studentFormGroup">
+      <mat-slide-toggle formControlName="transport" (change)="transportChange()">Transport</mat-slide-toggle>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Aadhar no" formControlName="aadharno">
+          <mat-error *ngIf="studentFormGroup.controls['aadharno'].hasError('pattern')">
+            Please enter a valid Aadhar no
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Nationality" formControlName="nationality" readonly="true" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstname" required>
+          <mat-error *ngIf="studentFormGroup.controls['firstname'].hasError('pattern')">
+            Please enter a valid First name
+          </mat-error>
+          <mat-error *ngIf="studentFormGroup.controls['firstname'].hasError('required')">
+            First name is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Middle name" formControlName="middlename">
+          <mat-error *ngIf="studentFormGroup.controls['middlename'].hasError('pattern')">
+            Please enter a valid Middle name
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastname" required>
+          <mat-error *ngIf="studentFormGroup.controls['lastname'].hasError('pattern')">
+            Please enter a valid Last name
+          </mat-error>
+          <mat-error *ngIf="studentFormGroup.controls['lastname'].hasError('required')">
+            Last name is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dateofbirth" required readonly="true">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+          <mat-error *ngIf="studentFormGroup.controls['dateofbirth'].hasError('required')">
+            Date of birth is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Blood Group" formControlName="bloodgroup" required #bloodgroupSelect="matSelect">
+            <mat-option *ngFor="let bgroup of bloodgroups" [value]="bgroup.Id">
+              {{ bgroup.Name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="studentFormGroup.controls['bloodgroup'].hasError('required')">
+            Blood group is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Gender" formControlName="gender" required #genderSelect="matSelect">
+            <mat-option *ngFor="let gender of genders" [value]="gender.Id">
+              {{ gender.Name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="studentFormGroup.controls['gender'].hasError('required')">
+            Gender is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Category" formControlName="category" required #categorySelect="matSelect">
+            <mat-option *ngFor="let category of categories" [value]="category.Id">
+              {{ category.Name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="studentFormGroup.controls['category'].hasError('required')">
+            Category is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Religion" formControlName="religion" required #religionSelect="matSelect">
+            <mat-option *ngFor="let religion of religions" [value]="religion.Id">
+              {{ religion.Name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="studentFormGroup.controls['religion'].hasError('required')">
+            Religion is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Cast" formControlName="cast" required>
+          <mat-error *ngIf="studentFormGroup.controls['cast'].hasError('pattern')">
+            Please enter a valid Cast
+          </mat-error>
+          <mat-error *ngIf="studentFormGroup.controls['cast'].hasError('required')">
+            Cast is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-select #studentTypeSelect="matSelect" placeholder="Student Type" formControlName="studenttype" required>
+          <mat-option *ngFor="let type of studentType" [value]="type.Id">
+            {{ type.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="studentFormGroup.controls['studenttype'].hasError('required')">
+          Please select a Student type
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Reference" formControlName="reference">
+      </mat-form-field>
+      <button type="button" mat-fab color="primary" (click)="searchReference()">Search</button>
+      <div>
+        <button type="button" mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="classFormGroup" editable="true">
+    <ng-template matStepLabel>Class Details</ng-template>
+    <form [formGroup]="classFormGroup">
+      <mat-form-field>
+        <input matInput placeholder="Previous School" formControlName="previousschool">
+        <mat-error *ngIf="classFormGroup.controls['previousschool'].hasError('pattern')">
+          Please enter a valid Previous school
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Previous Class" formControlName="previousclass">
+        <mat-error *ngIf="classFormGroup.controls['previousclass'].hasError('pattern')">
+          Please enter a valid Previous class
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Class" formControlName="class" (selectionChange)="classChanged()" required #classSelect="matSelect">
+          <mat-option *ngFor="let class of classes" [value]="class.Id">
+            {{ class.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="classFormGroup.controls['class'].hasError('required')">
+          Class is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Section" formControlName="section" (selectionChange)="sectionChanged()" required #sectionSelect="matSelect">
+          <mat-option *ngFor="let section of sections" [value]="section.Id">
+            {{ section.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="classFormGroup.controls['section'].hasError('required')">
+          Section is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Stream" formControlName="stream" required #streamSelect="matSelect">
+          <mat-option *ngFor="let stream of streams" [value]="stream.Id">
+            {{ stream.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="classFormGroup.controls['stream'].hasError('required')">
+          Stream is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button type="button" mat-raised-button matStepperPrevious color="primary">Back</button>
+        <button type="button" mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="parentFormGroup" editable="true">
+    <ng-template matStepLabel>Parent Details</ng-template>
+    <form [formGroup]="parentFormGroup">
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Parent" formControlName="parenttype" required #parenttypeSelect="matSelect">
+            <mat-option *ngFor="let parenttype of parenttypes" [value]="parenttype.Id">
+              {{ parenttype.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button type="button" (click)="addParent()" color="primary">Add</button>
+      </div>
+      <mat-tab-group formArrayName="parents">
+        <mat-tab *ngFor="let parent of parentFormGroup['controls'].parents['controls']; let i=index;" label="{{parent.controls['title'].value}}">
+          <div formGroupName="{{i}}">
+            <mat-checkbox formControlName="primarycontact">As primary contact</mat-checkbox>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Name" formControlName="name" required>
+                <mat-error *ngIf="parent.controls['name'].hasError('pattern')">
+                  Please enter a valid Name
+                </mat-error>
+                <mat-error *ngIf="parent.controls['name'].hasError('required')">
+                  Name is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Occupation" formControlName="occupation" required>
+                <mat-error *ngIf="parent.controls['occupation'].hasError('pattern')">
+                  Please enter a valid Occupation
+                </mat-error>
+                <mat-error *ngIf="parent.controls['occupation'].hasError('required')">
+                  Occupation is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <textarea matInput placeholder="Address" formControlName="address" required matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+                <mat-error *ngIf="parent.controls['address'].hasError('required')">
+                  Address is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="country-code">
+                <input matInput readonly value="+91">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Contact" formControlName="contact" required>
+                <mat-hint align="end">{{parent.controls['contact'].value.length}} / 10</mat-hint>
+                <mat-error *ngIf="parent.controls['contact'].hasError('pattern')">
+                  Please enter a valid mobile number
+                </mat-error>
+                <mat-error *ngIf="parent.controls['contact'].hasError('required')">
+                  Mobile number is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Email address" formControlName="email" required>
+                <mat-error *ngIf="parent.controls['email'].hasError('pattern')">
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="parent.controls['email'].hasError('required')">
+                  Email address is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-raised-button type="button" (click)="removeParent(i)" color="primary">Remove</button>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <div>
+        <button type="button" mat-raised-button matStepperPrevious color="primary">Back</button>
+        <button type="button" mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="transportFormGroup" optional="{{!studentFormGroup.controls['transport'].value}}">
+    <ng-template matStepLabel>Transport Details</ng-template>
+    <form [formGroup]="transportFormGroup">
+      <mat-form-field>
+        <mat-select placeholder="Location" formControlName="location" required (selectionChange)="locationChanged()" #locationSelect="matSelect">
+          <mat-option *ngFor="let location of locations" [value]="location.Id">
+            {{ location.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="transportFormGroup.controls['location'].hasError('required')">
+          Location is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Bus Route" formControlName="busroute" required #busrouteSelect="matSelect">
+          <mat-option *ngFor="let busroute of busroutes" [value]="busroute.Id">
+            {{ busroute.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="transportFormGroup.controls['busroute'].hasError('required')">
+          Bus Route is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button type="button" mat-raised-button matStepperPrevious color="primary">Back</button>
+        <button type="button" mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Complete</ng-template>
+    <span *ngIf="!IsSubmitted">Please verify all details before submitting.</span>
+    <div *ngIf="registeredStu">
+      <span class="span-break">Registration Number : {{registeredStu.RegistrationNo}}</span>
+      <span class="span-break">Admission Number : {{ registeredStu.AdmissionNo}}</span>
+      <span class="span-break">Roll Number : {{registeredStu.RollNumber}}</span>
+    </div>
+    <div>
+      <button type="button" mat-raised-button matStepperPrevious *ngIf="!IsSubmitted" color="primary">Back</button>
+      <button type="button" mat-raised-button (click)="register()" *ngIf="!IsSubmitted" color="primary">Submit</button>
+      <button type="button" mat-raised-button color="primary" *ngIf="IsSubmitted" (click)="countinue()">Countinue</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

@@ -1,0 +1,44 @@
+<mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" *ngIf="resultsLength>0">
+  <ng-container matColumnDef="amount">
+    <mat-header-cell *matHeaderCellDef>Fee Amount</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.Amount | currency:'&#8377;' }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="feetype">
+    <mat-header-cell *matHeaderCellDef>Fee Type</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.FeeType }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="fine">
+    <mat-header-cell *matHeaderCellDef>Fine Amount</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.Fine | currency:'&#8377;'}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef>Month</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.FeeDate|date : 'MMMM yy'}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="discount">
+    <mat-header-cell *matHeaderCellDef>Discount</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.Discount | currency:'&#8377;'}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.IsPaid?"Paid":"Not Paid"}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="comment">
+    <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.Comment }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-raised-button *ngIf="!row.IsPaid" (click)="payfee(row)" color="primary">Pay</button>
+      <button mat-raised-button *ngIf="row.IsPaid" color="primary" disabled>Pay</button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-paginator [length]="resultsLength" [pageSize]="pageSize">
+  </mat-paginator>
+</mat-table>
+<div *ngIf="resultsLength<=0" class="no-details-found">
+  No details found !!!
+</div>

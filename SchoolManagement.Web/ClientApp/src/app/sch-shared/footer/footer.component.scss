@@ -1,0 +1,30 @@
+.footer-container{
+    display: flex;
+    width: 100%;
+    background-color: #ebebeb;
+    justify-content: center;
+    .sch-footer{
+        padding-top: 10px;
+        .sch-footer-social{
+            padding-bottom: 12px;
+            color: #171717;
+            ul{
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                li{
+                    display: inline-flex;
+                    a{
+                        font-size: 1.13rem;
+                        color: inherit;
+                        padding: 3px 6px;
+                    }
+                    &:hover{
+                        opacity: .4;
+                        transition: opacity .5s;
+                    }
+                }
+            }
+        }
+    }
+}

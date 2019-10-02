@@ -1,0 +1,33 @@
+<button mat-fab [matMenuTriggerFor]="mainMenu" color="primary">
+  <mat-icon>menu</mat-icon>
+</button>
+<mat-menu #mainMenu="matMenu" [overlapTrigger]="false">
+  <a mat-menu-item routerLink="/">Home</a>
+  <a mat-menu-item>About</a>
+  <button mat-menu-item [matMenuTriggerFor]="admission">Admission</button>
+  <button mat-menu-item [matMenuTriggerFor]="finance">Finance</button>
+  <button mat-menu-item [matMenuTriggerFor]="config">Configuration</button>
+  <button mat-menu-item [matMenuTriggerFor]="report">Report</button>
+  <a mat-menu-item>Contact Us</a>
+</mat-menu>
+<mat-menu #admission="matMenu" [overlapTrigger]="false">
+  <a mat-menu-item routerLink="/admission/admission">Admission</a>
+  <a mat-menu-item routerLink="/admission/readmission">Re-admission</a>
+</mat-menu>
+<mat-menu #finance="matMenu" [overlapTrigger]="false">
+  <a mat-menu-item routerLink="/finance/fee">Fee</a>
+  <a mat-menu-item routerLink="/finance/account">Account</a>
+</mat-menu>
+<mat-menu #config="matMenu" [overlapTrigger]="false">
+  <a mat-menu-item routerLink="/config/class">Class</a>
+  <a mat-menu-item routerLink="/config/fee">Fee</a>
+  <a mat-menu-item routerLink="/config/bus">Bus</a>
+  <a mat-menu-item routerLink="/config/user">User</a>
+  <a mat-menu-item routerLink="/config/studenttype">Student Type</a>
+  <a mat-menu-item routerLink="/config/studentdiscount">Student Discount</a>
+</mat-menu>
+<mat-menu #report="matMenu" [overlapTrigger]="false">
+  <a mat-menu-item routerLink="/report/feereport">Fee</a>
+  <a mat-menu-item routerLink="/report/studentreport">Student</a>
+  <!-- <a mat-menu-item routerLink="/report/admissionreport">Admission</a> -->
+</mat-menu>

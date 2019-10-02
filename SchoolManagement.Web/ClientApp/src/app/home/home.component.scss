@@ -1,0 +1,86 @@
+@import "../../shared.scss";
+$home_url: url("../../assets/schoolHome.jpg");
+$home1_url: url("../../assets/schoolHome1.jpg");
+$home2_url: url("../../assets/schoolHome2.jpg");
+$home3_url: url("../../assets/schoolHome3.jpg");
+$home4_url: url("../../assets/schoolHome4.jpg");
+$home5_url: url("../../assets/schoolHome5.jpg");
+$home6_url: url("../../assets/schoolHome6.jpg");
+$home7_url: url("../../assets/schoolHome7.jpg");
+$home8_url: url("../../assets/schoolHome8.jpg");
+$home9_url: url("../../assets/schoolHome9.jpg");
+.sch-home {
+  background: $home_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home1 {
+  background: $home1_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home2 {
+  background: $home2_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home3 {
+  background: $home3_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home4 {
+  background: $home4_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home5 {
+  background: $home5_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home6 {
+  background: $home6_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home7 {
+  background: $home7_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home8 {
+  background: $home8_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+.sch-home9 {
+  background: $home9_url;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  height: 69vh;
+  width: 100%;
+}
+// carousel item
+.item {
+  width: 100vw;
+  height: 69vh;
+}

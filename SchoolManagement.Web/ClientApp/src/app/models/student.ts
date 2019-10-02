@@ -1,0 +1,36 @@
+import { Guid } from "guid-typescript";
+export interface Student {
+  Id?: Guid;
+  RollNumber?: number;
+  RegistrationNo?: string;
+  AdmissionNo?: string;
+  AadharNumber?: number;
+  Firstname: string;
+  Middlename?: string;
+  Lastname: string;
+  Dateofbirth: Date;
+  GenderId: string;
+  BloodGroupId: string;
+  CategoryId: string;
+  ReligionId: string;
+  Cast: string;
+  BusRouteId?: string;
+  ClassId: string;
+  ClassCode: string;
+  SectionId?: string;
+  StreamId?: string;
+  PreviousSchoolName?: string;
+  PreviousSchoolClass?: string;
+  Nationality: string;
+  BloodGroup?: string;
+  BusRoute?: string;
+  Category?: string;
+  Class?: string;
+  Gender?: string;
+  Religion?: string;
+  Section?: string;
+  Stream?: string;
+  StudentTypeId: Guid;
+  StudentType: string;
+  Reference: Guid;
+}

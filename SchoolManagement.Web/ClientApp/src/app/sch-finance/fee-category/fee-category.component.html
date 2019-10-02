@@ -1,0 +1,9 @@
+<div class="mat-elevation-z8">
+  <mat-accordion multi="true">
+    <mat-expansion-panel [hideToggle]="true" *ngFor="let feeType of classfee; let i=index;">
+      <mat-expansion-panel-header>{{feeType.FeeType}}</mat-expansion-panel-header>
+      <school-fee-detail *ngIf="currentYearFee" [RemovedFee]="currentRemovedFee" [FeeData]="getFilteredFeeData(feeType.FeeTypeId)"
+        (FeePaying)="feePaying($event)"></school-fee-detail>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

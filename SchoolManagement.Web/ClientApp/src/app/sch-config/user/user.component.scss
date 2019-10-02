@@ -1,0 +1,23 @@
+.user-container {
+  margin: 20px;
+  padding: 20px;
+  .userform {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    mat-form-field {
+      margin-right: 10px;
+    }
+  }
+  .editForm {
+    mat-form-field {
+      margin-right: 20px;
+    }
+  }
+  .passwordForm {
+    mat-form-field {
+      margin-right: 40px;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="role-container mat-elevation-z8">
+  <form [formGroup]="roleFormGroup" *ngIf="option.IsAdd">
+    <mat-form-field>
+      <input matInput placeholder="Role Name" formControlName="name" required>
+      <mat-error *ngIf="roleFormGroup.controls['name'].hasError('pattern')">
+        Please enter a valid Role name
+      </mat-error>
+      <mat-error *ngIf="roleFormGroup.controls['name'].hasError('required')">
+        Role name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="description">
+      <input matInput placeholder="Role Description" formControlName="description">
+      <mat-error *ngIf="roleFormGroup.controls['description'].hasError('pattern')">
+        Please enter a valid Role name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+        <mat-option *ngFor="let status of statusList" [value]="status.Id">
+          {{ status.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="roleFormGroup.controls['status'].hasError('required')">
+        Status is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="add()">Add</button>
+  </form>
+  <form [formGroup]="editFormGroup" *ngIf="!option.IsAdd">
+    <mat-form-field>
+      <input matInput placeholder="Role Name" formControlName="name" required>
+      <mat-error *ngIf="editFormGroup.controls['name'].hasError('pattern')">
+        Please enter a valid Role name
+      </mat-error>
+      <mat-error *ngIf="editFormGroup.controls['name'].hasError('required')">
+        Role name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="description">
+      <input matInput placeholder="Role Description" formControlName="description">
+      <mat-error *ngIf="editFormGroup.controls['description'].hasError('pattern')">
+        Please enter a valid Role name
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="delete()">Delete</button>
+  </form>
+</div>

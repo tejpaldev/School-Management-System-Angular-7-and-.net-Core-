@@ -1,0 +1,24 @@
+<div *ngIf="profiles" class="profiles-container">
+  <mat-card *ngFor="let profile of profiles">
+    <mat-card-title-group>
+      <mat-card-title>{{getFullName(profile.Student)}}</mat-card-title>
+      <mat-card-subtitle>{{profile.Student.Dateofbirth|date}}</mat-card-subtitle>
+      <!-- <img matCardImage src="Side image"> -->
+    </mat-card-title-group>
+    <!-- <img matCardImage src="Card wide image source"> -->
+    <mat-card-content>
+      <span> Registration : {{profile.Student.RegistrationNo}}</span>
+      <span> Admission : {{profile.Student.AdmissionNo}}</span>
+      <span> Class : {{profile.Student.Class}}</span>
+      <span *ngFor="let parent of profile.Parents">
+        {{parent.ParentTypeName + " Name"}} : {{parent.Name}}
+      </span>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <!-- <button mat-raised-button color="primary" (click)="viewDetails(profile)">View</button> -->
+    </mat-card-actions>
+    <mat-card-footer>
+      <!-- Footer -->
+    </mat-card-footer>
+  </mat-card>
+</div>

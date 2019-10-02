@@ -1,0 +1,131 @@
+<div class="user-container mat-elevation-z8">
+  <form class="userform" [formGroup]="userFormGroup" *ngIf="option.IsAdd && !option.IsPassword">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Username" formControlName="username" required>
+        <mat-error *ngIf="userFormGroup.controls['username'].hasError('pattern')">
+          Please enter a valid Username
+        </mat-error>
+        <mat-error *ngIf="userFormGroup.controls['username'].hasError('required')">
+          Username is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" formControlName="password" [type]="password" required>
+        <mat-error *ngIf="userFormGroup.controls['password'].hasError('pattern')">
+          Please enter a valid Pasword
+        </mat-error>
+        <mat-error *ngIf="userFormGroup.controls['password'].hasError('required')">
+          Password is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Email Address" formControlName="email" required>
+        <mat-error *ngIf="userFormGroup.controls['email'].hasError('pattern')">
+          Please enter a valid Email address
+        </mat-error>
+        <mat-error *ngIf="userFormGroup.controls['email'].hasError('required')">
+          Email is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Contact" formControlName="contact" required>
+        <mat-error *ngIf="userFormGroup.controls['contact'].hasError('pattern')">
+          Please enter a valid Contact
+        </mat-error>
+        <mat-error *ngIf="userFormGroup.controls['contact'].hasError('required')">
+          Contact is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Role" formControlName="role" #roleSelect="matSelect" required>
+          <mat-option *ngFor="let role of roleList" [value]="role.Id">
+            {{ role.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userFormGroup.controls['role'].hasError('required')">
+          Role is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+          <mat-option *ngFor="let status of statusList" [value]="status.Id">
+            {{ status.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userFormGroup.controls['status'].hasError('required')">
+          Status is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="add()">Add</button>
+  </form>
+  <form class="editForm" [formGroup]="editFormGroup" *ngIf="!option.IsAdd && !option.IsPassword">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username" required>
+      <mat-error *ngIf="editFormGroup.controls['username'].hasError('pattern')">
+        Please enter a valid Username
+      </mat-error>
+      <mat-error *ngIf="editFormGroup.controls['username'].hasError('required')">
+        Username is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email Address" formControlName="email" required>
+      <mat-error *ngIf="editFormGroup.controls['email'].hasError('pattern')">
+        Please enter a valid Email address
+      </mat-error>
+      <mat-error *ngIf="editFormGroup.controls['email'].hasError('required')">
+        Email is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Contact" formControlName="contact" required>
+      <mat-error *ngIf="editFormGroup.controls['contact'].hasError('pattern')">
+        Please enter a valid Contact
+      </mat-error>
+      <mat-error *ngIf="editFormGroup.controls['contact'].hasError('required')">
+        Contact is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Role" formControlName="role" #roleSelect="matSelect" required>
+        <mat-option *ngFor="let role of roleList" [value]="role.Id">
+          {{ role.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="editFormGroup.controls['role'].hasError('required')">
+        Role is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="edit()">Edit</button>
+    <button mat-raised-button color="primary" (click)="delete()">Delete</button>
+  </form>
+  <form class="passwordForm" [formGroup]="passwordFormGroup" *ngIf="!option.IsAdd && option.IsPassword">
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password" [type]="password" required>
+      <mat-error *ngIf="passwordFormGroup.controls['password'].hasError('pattern')">
+        Please enter a valid Pasword
+      </mat-error>
+      <mat-error *ngIf="passwordFormGroup.controls['password'].hasError('required')">
+        Password is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="change()">Change</button>
+  </form>
+</div>

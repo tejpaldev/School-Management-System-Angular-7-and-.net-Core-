@@ -1,0 +1,72 @@
+<div class="student-type-container">
+  <button mat-fab (click)="add()" color="primary">
+    <mat-icon class="mat-18">add</mat-icon>
+  </button>
+  <mat-table class="mat-elevation-z8" [dataSource]="studentType">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.Name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.Description}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.Status}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-mini-fab (click)="edit(row)" color="primary">
+          <mat-icon class="mat-18">edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-mini-fab (click)="delete(row)" color="primary">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayColumn"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumn"></mat-row>
+  </mat-table>
+</div>
+<ng-template #addEditType>
+  <h2 mat-dialog-title>{{title}}</h2>
+  <mat-dialog-content>
+    <form [formGroup]="addEditForm">
+      <mat-form-field>
+        <input matInput placeholder="Student Type Name" formControlName="name" type="text" required>
+        <mat-error *ngIf="addEditForm.controls['name'].hasError('required')">
+          Name is
+          <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="addEditForm.controls['name'].hasError('pattern')">
+          Please enter a valid Name
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+          <mat-option *ngFor="let status of statusList" [value]="status.Id">
+            {{ status.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="addEditForm.controls['status'].hasError('required')">
+          Status is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button (click)="save()">Save</button>
+  </mat-dialog-actions>
+</ng-template>

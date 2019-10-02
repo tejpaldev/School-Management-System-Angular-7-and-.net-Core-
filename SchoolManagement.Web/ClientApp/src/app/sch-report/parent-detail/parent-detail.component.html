@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  <mat-table #parentTable [dataSource]="parentData">
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef>Sr. No.</mat-header-cell>
+      <mat-cell *matCellDef="let row;let i=index">{{ i+1 }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef>Parent</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.ParentType + " Name" }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="contact">
+      <mat-header-cell *matHeaderCellDef>Contact</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Contact }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Email }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Address }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="occupation">
+      <mat-header-cell *matHeaderCellDef>Occupation</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Occupation }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="parentColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: parentColumns;"></mat-row>
+  </mat-table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+</div>

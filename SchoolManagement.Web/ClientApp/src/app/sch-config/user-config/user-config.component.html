@@ -1,0 +1,76 @@
+<div class="user-config-container">
+  <button mat-fab [matMenuTriggerFor]="mainMenu" color="primary">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mainMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="roleMenu">Role</button>
+    <button mat-menu-item [matMenuTriggerFor]="userMenu">User</button>
+    <a mat-menu-item [routerLink]="['/config']">
+      <mat-icon>keyboard_backspace</mat-icon>
+      <span>Back</span>
+    </a>
+  </mat-menu>
+  <mat-menu #roleMenu="matMenu">
+    <button mat-menu-item (click)="addRole()">
+      <mat-icon>add</mat-icon>
+      <span>Add Role</span>
+    </button>
+    <button mat-menu-item (click)="editRoleSearch()">
+      <mat-icon>mode_edit</mat-icon>
+      <span>Edit Role</span>
+    </button>
+  </mat-menu>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="addUser()">
+      <mat-icon>add</mat-icon>
+      <span>Add User</span>
+    </button>
+    <button mat-menu-item (click)="editUserSearch()">
+      <mat-icon>mode_edit</mat-icon>
+      <span>Edit User</span>
+    </button>
+    <button mat-menu-item (click)="editPassword()">
+      <mat-icon>mode_edit</mat-icon>
+      <span>Change password</span>
+    </button>
+  </mat-menu>
+  <form class="mat-elevation-z8" [formGroup]="userSearchForm" *ngIf="isUserEdit">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username">
+      <mat-error *ngIf="userSearchForm.controls['username'].hasError('pattern')">
+        Please enter a valid Username
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email Address" formControlName="email">
+      <mat-error *ngIf="userSearchForm.controls['email'].hasError('pattern')">
+        Please enter a valid Email address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Contact Number" formControlName="contact">
+      <mat-error *ngIf="userSearchForm.controls['contact'].hasError('pattern')">
+        Please enter a valid Contact Number
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button (click)="editUser()" color="primary">Search</button>
+    <mat-error *ngIf="userSearchForm.hasError('validateSearch')">
+      Please enter at least one field.
+    </mat-error>
+  </form>
+  <form class="mat-elevation-z8" [formGroup]="roleSearchForm" *ngIf="isRoleEdit">
+    <mat-form-field>
+      <input matInput placeholder="Role name" formControlName="rolename" required>
+      <mat-error *ngIf="roleSearchForm.controls['rolename'].hasError('pattern')">
+        Please enter a valid Role name
+      </mat-error>
+      <mat-error *ngIf="roleSearchForm.controls['rolename'].hasError('required')">
+        Role name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button (click)="editRole()" color="primary">Search</button>
+  </form>
+  <school-role *ngIf="isRole" [option]="roleOption"></school-role>
+  <school-user *ngIf="isUser" [option]="userOption"></school-user>
+</div>

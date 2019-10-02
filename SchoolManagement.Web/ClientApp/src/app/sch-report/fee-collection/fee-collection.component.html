@@ -1,0 +1,46 @@
+<div>
+    <mat-table #studentTable [dataSource]="collectionData">
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef>Sr. No.</mat-header-cell>
+        <mat-cell *matCellDef="let row;let i = index;">{{ i+1 }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="admissionno">
+        <mat-header-cell *matHeaderCellDef>Admission No</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Student.AdmissionNo }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Student Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.Student.Middlename ? row.Student.Firstname + " " + row.Student.Middlename + " " + row.Student.Lastname : row.Student.Firstname
+          + " " + row.Student.Lastname}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="class">
+        <mat-header-cell *matHeaderCellDef>Class</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.Student.Class}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="section">
+        <mat-header-cell *matHeaderCellDef>Section</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.Student.Section}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="parent">
+        <mat-header-cell *matHeaderCellDef>Parent Details</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="viewParentDetail(row.Parents)" color="primary">View</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fee">
+        <mat-header-cell *matHeaderCellDef>Fee Details</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="viewFeeDetail(row.Fees)" color="primary">View</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef>Total Fee</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{getTotalFee(row.Fees)}}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="studentColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: studentColumns;"></mat-row>
+      <mat-paginator [length]="resultsLength" [pageSize]="10">
+      </mat-paginator>
+    </mat-table>
+  </div>
+  

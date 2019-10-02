@@ -1,0 +1,43 @@
+.fee-detail-table {
+  overflow: auto;
+  min-height: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .mat-header-cell {
+    font-size: 14px;
+  }
+  .mat-column-date {
+    max-width: 110px;
+    min-width: 100px;
+  }
+  .mat-column-feetype {
+    max-width: 150px;
+    min-width: 130px;
+  }
+  .mat-column-amount {
+    max-width: 110px;
+    min-width: 100px;
+  }
+  .mat-column-fine {
+    max-width: 110px;
+    min-width: 100px;
+  }
+  .mat-column-discount {
+    max-width: 110px;
+    min-width: 100px;
+  }
+  .mat-column-paymentmode {
+    max-width: 100px;
+    min-width: 80px;
+  }
+  .mat-column-comment {
+    max-width: 220px;
+    min-width: 200px;
+    text-align: center;
+  }
+}
+
+.no-details-found {
+  font-size: 20px;
+  font-weight: 500;
+}

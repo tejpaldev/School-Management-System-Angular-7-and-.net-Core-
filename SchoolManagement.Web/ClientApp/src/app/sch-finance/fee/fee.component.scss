@@ -1,0 +1,24 @@
+.fee-container {
+  margin: 20px;
+  .search-form {
+    padding: 20px;
+    // border: 1px groove rgb(175, 173, 173);
+    // border-radius: 5px;
+    .label-text {
+      margin-right: 10px;
+      margin-left: 10px;
+      font-weight: 800;
+    }
+    .note-lable {
+      font-weight: 500;
+      margin-top: 10px;
+    }
+    .search-button {
+      margin-left: 50px;
+    }
+  }
+  .search-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}

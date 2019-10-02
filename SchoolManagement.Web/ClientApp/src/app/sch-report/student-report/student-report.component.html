@@ -1,0 +1,7 @@
+<div class="filter-container">
+    <div class="filter">
+        <school-report-filter [filterRender]="fieldList" (reportFilter)="filters($event)"></school-report-filter>
+    </div>
+    <h4>{{errorMsg}}</h4>
+</div>
+<school-student-profile *ngIf="isStudentProfile" [filter]="filter"></school-student-profile>

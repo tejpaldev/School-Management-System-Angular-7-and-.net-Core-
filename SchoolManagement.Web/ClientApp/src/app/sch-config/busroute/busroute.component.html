@@ -1,0 +1,74 @@
+<div class="busroute-container mat-elevation-z8">
+  <form [formGroup]="busrouteAddForm" *ngIf="option.IsAdd">
+    <mat-form-field>
+      <input matInput placeholder="Bus Route Name" formControlName="name" required>
+      <mat-error *ngIf="busrouteAddForm.controls['name'].hasError('pattern')">
+        Please enter a valid Bus Route name
+      </mat-error>
+      <mat-error *ngIf="busrouteAddForm.controls['name'].hasError('required')">
+        Bus Route name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="description">
+      <input matInput placeholder="Bus Route Description" formControlName="description">
+      <mat-error *ngIf="busrouteAddForm.controls['description'].hasError('pattern')">
+        Please enter a valid Bus Route description
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Location" formControlName="location" #locationSelect="matSelect" required>
+        <mat-option *ngFor="let location of locationList" [value]="location.Id">
+          {{ location.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="busrouteAddForm.controls['location'].hasError('required')">
+        Location is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+        <mat-option *ngFor="let status of statusList" [value]="status.Id">
+          {{ status.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="busrouteAddForm.controls['status'].hasError('required')">
+        Status is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="add()">Add</button>
+  </form>
+  <form [formGroup]="busrouteEditForm" *ngIf="!option.IsAdd">
+    <mat-form-field>
+      <input matInput placeholder="Bus Route Name" formControlName="name" required>
+      <mat-error *ngIf="busrouteEditForm.controls['name'].hasError('pattern')">
+        Please enter a valid Bus route name
+      </mat-error>
+      <mat-error *ngIf="busrouteEditForm.controls['name'].hasError('required')">
+        Bus route name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="description">
+      <input matInput placeholder=" Bus Route Description" formControlName="description">
+      <mat-error *ngIf="busrouteEditForm.controls['description'].hasError('pattern')">
+        Please enter a valid Bus route description
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Location" formControlName="location" #locationSelect="matSelect" required>
+        <mat-option *ngFor="let location of locationList" [value]="location.Id">
+          {{ location.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="busrouteEditForm.controls['location'].hasError('required')">
+        Location is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="edit()">Edit</button>
+    <button mat-raised-button color="primary" (click)="delete()">Delete</button>
+  </form>
+</div>

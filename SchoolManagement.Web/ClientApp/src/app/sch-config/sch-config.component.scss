@@ -1,0 +1,22 @@
+.div-button{
+  display: flex;
+  margin: 5em;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .link{
+      height: 25vh;
+      width: 15vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin: 5px;
+      .content{
+          display: flex;
+          flex-direction: column;
+          height: 20vh;
+          span{
+              font-size: large;
+          }
+      }
+  }
+}

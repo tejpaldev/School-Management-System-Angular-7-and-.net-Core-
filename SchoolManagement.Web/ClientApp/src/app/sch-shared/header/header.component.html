@@ -1,0 +1,21 @@
+<div class="sch-nav primaryColor mat-elevation-z6">
+  <div class="sch-logo" (click)="logo()" fxShow="true" fxHide.lt-md="true"></div>
+  <school-menu-small fxShow="true" fxHide.gt-sm></school-menu-small>
+  <a mat-fab *ngIf="!isLoggedIn" color="primary" class="sch-login" routerLink="/user/login" aria-label="Login">
+    <mat-icon>input</mat-icon>
+  </a>
+  <div *ngIf="isLoggedIn" class="sch-login">
+    <span>Hi {{name}}</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item (click)="changepwd()">
+        Change Password
+      </button>
+      <button mat-menu-item (click)="logout()">
+        Logout
+      </button>
+    </mat-menu>
+  </div>
+</div>

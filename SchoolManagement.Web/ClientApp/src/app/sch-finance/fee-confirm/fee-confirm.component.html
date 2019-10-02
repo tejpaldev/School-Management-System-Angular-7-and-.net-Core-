@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.fee.message}}</p>
+  <form [formGroup]="feeForm">
+    <mat-form-field>
+      <input matInput placeholder="Fee Amount" formControlName="amount">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Fine" formControlName="fine">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Discount" formControlName="discount">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Comment" formControlName="comment">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="cancel()" cdkFocusInitial color="primary">Cancel</button>
+  <button mat-raised-button (click)="submit()" color="primary">Submit</button>
+</div>

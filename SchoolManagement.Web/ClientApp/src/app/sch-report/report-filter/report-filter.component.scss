@@ -1,0 +1,12 @@
+.report-form{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    mat-form-field{
+        margin: 10px;
+    }
+    div{
+        display: flex;
+        align-items: center;
+    }
+}

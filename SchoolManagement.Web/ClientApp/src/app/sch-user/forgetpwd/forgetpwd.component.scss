@@ -1,0 +1,21 @@
+@import '../../../shared.scss';
+.form{
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 10px 0 10px;
+    form{
+        background-color: $white;
+        padding: 50px;
+        border-radius: 5px;   
+        button {
+            margin-left:10px;
+            background: $color_flame_pea_approx;
+            color: $white;
+            &:hover {
+                background: $color_mojo_approx;
+                transition: 0.5s all;
+            }
+        }
+    }
+}
+

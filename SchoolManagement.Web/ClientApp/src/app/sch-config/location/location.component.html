@@ -1,0 +1,52 @@
+<div class="location-container mat-elevation-z8">
+    <form [formGroup]="locationFormGroup" *ngIf="option.IsAdd">
+      <mat-form-field>
+        <input matInput placeholder="Location Name" formControlName="name" required>
+        <mat-error *ngIf="locationFormGroup.controls['name'].hasError('pattern')">
+          Please enter a valid Location name
+        </mat-error>
+        <mat-error *ngIf="locationFormGroup.controls['name'].hasError('required')">
+          Location name is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="description">
+        <input matInput placeholder="Location Description" formControlName="description">
+        <mat-error *ngIf="locationFormGroup.controls['description'].hasError('pattern')">
+          Please enter a valid Location description
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+          <mat-option *ngFor="let status of statusList" [value]="status.Id">
+            {{ status.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="locationFormGroup.controls['status'].hasError('required')">
+          Status is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="add()">Add</button>
+    </form>
+    <form [formGroup]="editFormGroup" *ngIf="!option.IsAdd">
+      <mat-form-field>
+        <input matInput placeholder="Location Name" formControlName="name" required>
+        <mat-error *ngIf="editFormGroup.controls['name'].hasError('pattern')">
+          Please enter a valid Location name
+        </mat-error>
+        <mat-error *ngIf="editFormGroup.controls['name'].hasError('required')">
+          Location name is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="description">
+        <input matInput placeholder="Location Description" formControlName="description">
+        <mat-error *ngIf="editFormGroup.controls['description'].hasError('pattern')">
+          Please enter a valid Location description
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="edit()">Edit</button>
+      <button mat-raised-button color="primary" (click)="delete()">Delete</button>
+    </form>
+  </div>

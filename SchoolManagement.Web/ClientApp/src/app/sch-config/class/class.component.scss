@@ -1,0 +1,13 @@
+.class-container {
+  margin: 0 20px 20px 70px;
+  div {
+    margin: 20px;
+    padding: 20px;
+    mat-form-field {
+      margin-right: 10px;
+    }
+    button {
+      margin-left: 10px;
+    }
+  }
+}

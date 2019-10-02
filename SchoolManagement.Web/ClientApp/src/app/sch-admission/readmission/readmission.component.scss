@@ -1,0 +1,75 @@
+.readmission-container {
+  margin: 20px;
+  .search-form {
+    padding: 20px;
+    .label-text {
+      margin-right: 10px;
+      margin-left: 10px;
+      font-weight: 800;
+    }
+    .note-lable {
+      font-weight: 500;
+      margin-top: 10px;
+    }
+    .search-button {
+      margin-left: 50px;
+    }
+  }
+  .search-table {
+    overflow: auto;
+    min-height: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .mat-header-cell {
+      font-size: 14px;
+    }
+    .mat-column-admissionno {
+      max-width: 100px;
+      min-width: 80px;
+    }
+    .mat-column-name {
+      max-width: 220px;
+      min-width: 200px;
+      text-align: center;
+    }
+    .mat-column-dateofbirth {
+      max-width: 120px;
+      min-width: 100px;
+    }
+    .mat-column-class {
+      max-width: 100px;
+      min-width: 80px;
+    }
+    .mat-column-section {
+      max-width: 100px;
+      min-width: 80px;
+    }
+    .mat-column-stream {
+      max-width: 100px;
+      min-width: 80px;
+    }
+    .mat-column-view {
+      max-width: 100px;
+      min-width: 100px;
+      text-align: center;
+    }
+    .mat-column-readmission {
+      max-width: 170px;
+      min-width: 150px;
+      text-align: center;
+    }
+  }
+  .readmission-form {
+    padding: 20px;
+    mat-form-field {
+      margin-right: 10px;
+    }
+    button {
+      margin-top: 20px;
+      align-self: center;
+    }
+  }
+  mat-accordion {
+    margin-top: 20px;
+  }
+}

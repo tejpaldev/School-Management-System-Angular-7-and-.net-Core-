@@ -1,0 +1,113 @@
+<div fxLayout="column wrap" fxLayoutAlign="space-around center" class="readmission-container">
+  <form fxLayout="row wrap" class="search-form mat-elevation-z8" [formGroup]="searchFormGroup" (ngSubmit)="search()">
+    <label class="note-lable">NOTE: Please provide Admission number or Class or Class along with Student name.</label>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Admission Number#" formControlName="admissionno">
+      </mat-form-field>
+      <label class="label-text">OR</label>
+      <mat-form-field>
+        <mat-select placeholder="Class#" formControlName="class" #classSelect="matSelect">
+          <mat-option *ngFor="let class of classes" [value]="class.Id">
+            {{ class.Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <label class="label-text">AND</label>
+      <mat-form-field>
+        <input matInput placeholder="Student Name#" formControlName="studentname">
+      </mat-form-field>
+      <button mat-raised-button class="search-button" type="submit" color="primary">Search</button>
+    </div>
+  </form>
+  <mat-table class="search-table mat-elevation-z8" #table [dataSource]="studentData">
+    <ng-container matColumnDef="admissionno">
+      <mat-header-cell *matHeaderCellDef>Admission No</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.AdmissionNo }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.Middlename ? row.Firstname + " " + row.Middlename + " " + row.Lastname : row.Firstname + " " + row.Lastname}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dateofbirth">
+      <mat-header-cell *matHeaderCellDef>Date Of Birth</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Dateofbirth | date }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="class">
+      <mat-header-cell *matHeaderCellDef>Class</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Class }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="section">
+      <mat-header-cell *matHeaderCellDef>Section</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Section }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="stream">
+      <mat-header-cell *matHeaderCellDef>Stream</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.Stream }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-raised-button (click)="viewFeeHistory(row.Id,row.ClassId)" color="primary">Details</button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="readmission">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-raised-button (click)="readmissionForms(row.Id)" color="primary">Re-admission</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="resultsLength" [pageSize]="10">
+  </mat-paginator>
+  <form fxLayout="row wrap" *ngIf="isReadmission" class="readmission-form mat-elevation-z8" [formGroup]="readmissionForm" (ngSubmit)="readmission()">
+    <mat-form-field>
+      <mat-select placeholder="Class" formControlName="class" (selectionChange)="classChanged()" required #classSelect="matSelect">
+        <mat-option *ngFor="let class of classes" [value]="class.Id">
+          {{ class.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="readmissionForm.controls['class'].hasError('required')">
+        Class is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Section" formControlName="section" (selectionChange)="sectionChanged()" required #sectionSelect="matSelect">
+        <mat-option *ngFor="let section of sections" [value]="section.Id">
+          {{ section.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="readmissionForm.controls['section'].hasError('required')">
+        Section is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Stream" formControlName="stream" required #streamSelect="matSelect">
+        <mat-option *ngFor="let stream of streams" [value]="stream.Id">
+          {{ stream.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="readmissionForm.controls['stream'].hasError('required')">
+        Stream is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button class="search-button" type="submit" color="primary">Submit</button>
+    </div>
+  </form>
+  <mat-accordion *ngIf="viewClicked">
+    <mat-expansion-panel [hideToggle]="true">
+      <mat-expansion-panel-header>Previous year fee details</mat-expansion-panel-header>
+      <school-fee-history [data]="previousYearFee"></school-fee-history>
+    </mat-expansion-panel>
+    <mat-expansion-panel [hideToggle]="true">
+      <mat-expansion-panel-header>Current year fee details</mat-expansion-panel-header>
+      <school-fee-history [data]="currentYearFee"></school-fee-history>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

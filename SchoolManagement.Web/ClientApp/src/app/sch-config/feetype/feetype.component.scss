@@ -1,0 +1,15 @@
+.feetype-container {
+  margin: 20px;
+  padding: 20px;
+  mat-form-field {
+    margin-right: 10px;
+  }
+  .description {
+    min-width: 30vw;
+  }
+  .feetype-table {
+    .mat-header-cell {
+      font-size: 14px;
+    }
+  }
+}

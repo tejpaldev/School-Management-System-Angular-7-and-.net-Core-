@@ -1,0 +1,27 @@
+<div class="carousel-wrapper">
+  <section class="slide-wrapper" [ngStyle]="carouselWrapperStyle">
+    <ul class="carousel-inner" #carousel>
+      <li *ngFor="let item of items;" class="carousel-item">
+        <ng-container [ngTemplateOutlet]="item.tpl"></ng-container>
+      </li>
+    </ul>
+  </section>
+  <!-- <div *ngIf="showControls" (mouseenter)="pause()" (mouseleave)="play()" class="carousel-control"> -->
+  <div *ngIf="showControls" class="carousel-control">
+    <div class="left">
+      <a (click)="prev()" *ngIf="currentIndex != 0">
+        <i class="material-icons">keyboard_arrow_left</i>
+      </a>
+    </div>
+    <div class="center">
+      <ul class="carousel-indicators">
+        <li *ngFor="let item of items; let i=index" [ngClass]="{'active': i == currentIndex}" (click)="slide(i)"></li>
+      </ul>
+    </div>
+    <div class="right">
+      <a (click)="next()" *ngIf="currentIndex != items.length-1">
+        <i class="material-icons">keyboard_arrow_right</i>
+      </a>
+    </div>
+  </div>
+</div>

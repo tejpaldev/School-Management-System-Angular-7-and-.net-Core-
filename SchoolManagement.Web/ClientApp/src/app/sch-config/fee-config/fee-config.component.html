@@ -1,0 +1,39 @@
+<div class="fee-config-container">
+  <button mat-fab [matMenuTriggerFor]="mainMenu" color="primary">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mainMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="feetypeMenu">Fee Type</button>
+    <button mat-menu-item [matMenuTriggerFor]="classfeeMenu">Class Fee</button>
+    <a mat-menu-item [routerLink]="['/config']">
+      <mat-icon>keyboard_backspace</mat-icon>
+      <span>Back</span>
+    </a>
+  </mat-menu>
+  <mat-menu #feetypeMenu="matMenu">
+    <button mat-menu-item (click)="addFeetype()">
+      <mat-icon>add</mat-icon>
+      <span>Add Feetype</span>
+    </button>
+    <button mat-menu-item (click)="deleteFeetype()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Feetype</span>
+    </button>
+  </mat-menu>
+  <mat-menu #classfeeMenu="matMenu">
+    <button mat-menu-item (click)="addClassFee()">
+      <mat-icon>add</mat-icon>
+      <span>Add Classfee</span>
+    </button>
+    <button mat-menu-item (click)="editClassFee()">
+      <mat-icon>mode_edit</mat-icon>
+      <span>Edit Classfee</span>
+    </button>
+    <button mat-menu-item (click)="deleteClassFee()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Classfee</span>
+    </button>
+  </mat-menu>
+  <school-feetype *ngIf="isFeetype" [option]="feetypeOption"></school-feetype>
+  <school-classfee *ngIf="isClassfee" [option]="classfeeOption"></school-classfee>
+</div>

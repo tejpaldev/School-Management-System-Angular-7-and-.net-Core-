@@ -1,0 +1,20 @@
+$logo_url:url("../../../assets/schoolIcon.png");
+.sch-nav{
+    display: flex;
+    height: 60px;
+    padding: 12px 16px 12px 16px !important;
+    .sch-logo {
+        background: $logo_url;
+        background-size: 60px 60px;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        height: 61px;
+        width: 61px;
+        border-radius: 50%;
+    }
+    .sch-login{
+        margin-bottom: auto;
+        margin-left: auto;
+        margin-top: auto;
+    }
+}

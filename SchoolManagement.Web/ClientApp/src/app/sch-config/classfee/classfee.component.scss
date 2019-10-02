@@ -1,0 +1,21 @@
+.classfee-container {
+  margin: 0 20px 20px 70px;
+  div {
+    margin: 20px;
+    padding: 20px;
+    mat-form-field {
+      margin-right: 10px;
+    }
+    .description {
+      min-width: 30vw;
+    }
+    .classfee-table {
+      .mat-header-cell {
+        font-size: 14px;
+      }
+    }
+    button {
+      margin-left: 10px;
+    }
+  }
+}

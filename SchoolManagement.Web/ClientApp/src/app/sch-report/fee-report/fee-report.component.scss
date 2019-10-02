@@ -1,0 +1,19 @@
+.menu-container {
+  margin: 10px;
+}
+
+.filter-container {
+  display: flex;
+  filter {
+    width: 50%;
+  }
+  h4 {
+    margin-left: 10em;
+    color: red;
+    align-self: center;
+  }
+}
+
+.report-container {
+  margin: 20px;
+}

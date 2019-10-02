@@ -1,0 +1,180 @@
+<div class="classfee-container">
+  <div *ngIf="isClassfeeAdd" class="mat-elevation-z8">
+    <form [formGroup]="classFeeForm" (ngSubmit)="addClassfee()">
+      <mat-form-field>
+        <mat-select placeholder="Class" formControlName="class" #classSelect="matSelect" required>
+          <mat-option *ngFor="let class of classList" [value]="class.Id">
+            {{ class.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="classFeeForm.controls['class'].hasError('required')">
+          Class is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Fee Type" formControlName="feetype" #feetypeSelect="matSelect" required>
+          <mat-option *ngFor="let feetype of feetypeList" [value]="feetype.Id">
+            {{ feetype.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="classFeeForm.controls['feetype'].hasError('required')">
+          Fee type is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Fee Amount" formControlName="fee" required>
+        <mat-error *ngIf="classFeeForm.controls['fee'].hasError('pattern')">
+          Please enter a valid Fee Amount
+        </mat-error>
+        <mat-error *ngIf="classFeeForm.controls['fee'].hasError('required')">
+          Fee Amount is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Fine Amount" formControlName="fine">
+        <mat-error *ngIf="classFeeForm.controls['fine'].hasError('pattern')">
+          Please enter a valid Fine Amount
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Discount Amount" formControlName="discount">
+        <mat-error *ngIf="classFeeForm.controls['discount'].hasError('pattern')">
+          Please enter a valid Discount Amount
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Fee Due Date" formControlName="duedate" required readonly="true">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+        <mat-error *ngIf="classFeeForm.controls['duedate'].hasError('required')">
+          Please enter a Fee Due Date
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+          <mat-option *ngFor="let status of statusList" [value]="status.Id">
+            {{ status.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="classFeeForm.controls['status'].hasError('required')">
+          Status is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="description">
+        <input matInput placeholder="Description" formControlName="description">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Add</button>
+    </form>
+  </div>
+  <div *ngIf="isClassfeeEdit">
+    <mat-table class="classfee-table mat-elevation-z8" #table [dataSource]="classFeeDataSource">
+      <ng-container matColumnDef="actiondelete">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="deleteClassfee(row.Id)" color="primary">Delete</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actionedit">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="editForm(row.Id)" color="primary">Edit</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="class">
+        <mat-header-cell *matHeaderCellDef>Class</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Class }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Description }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="feetype">
+        <mat-header-cell *matHeaderCellDef> Fee Type </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.FeeType }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fee">
+        <mat-header-cell *matHeaderCellDef> Fee Amount </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.FeeAmount }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fine">
+        <mat-header-cell *matHeaderCellDef> Fine Amount </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.FineAmount }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="discount">
+        <mat-header-cell *matHeaderCellDef> Discount Amount </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.DiscountAmount }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="duedate">
+        <mat-header-cell *matHeaderCellDef> Fee Due Date </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.FeeDueDate }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columnsDisplayed"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsDisplayed;"></mat-row>
+    </mat-table>
+    <mat-paginator [length]="totalLength" [pageSize]="10">
+    </mat-paginator>
+    <div *ngIf="isClassEditForm">
+      <form [formGroup]="classFeeForm" class="mat-elevation-z8" (ngSubmit)="editClassFee()">
+        <mat-form-field>
+          <mat-select placeholder="Class" formControlName="class" #classSelect="matSelect">
+            <mat-option *ngFor="let class of classList" [value]="class.Id">
+              {{ class.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Fee Type" formControlName="feetype" #feetypeSelect="matSelect">
+            <mat-option *ngFor="let feetype of feetypeList" [value]="feetype.Id">
+              {{ feetype.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Fee Amount" formControlName="fee" required>
+          <mat-error *ngIf="classFeeForm.controls['fee'].hasError('pattern')">
+            Please enter a valid Fee Amount
+          </mat-error>
+          <mat-error *ngIf="classFeeForm.controls['fee'].hasError('required')">
+            Fee Amount is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Fine Amount" formControlName="fine">
+          <mat-error *ngIf="classFeeForm.controls['fine'].hasError('pattern')">
+            Please enter a valid Fine Amount
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Discount Amount" formControlName="discount">
+          <mat-error *ngIf="classFeeForm.controls['discount'].hasError('pattern')">
+            Please enter a valid Discount Amount
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Fee Due Date" formControlName="duedate" required readonly="true">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+          <mat-error *ngIf="classFeeForm.controls['duedate'].hasError('required')">
+            Please enter a Fee Due Date
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect">
+            <mat-option *ngFor="let status of statusList" [value]="status.Id">
+              {{ status.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="description">
+          <input matInput placeholder="Description" formControlName="description">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Edit</button>
+      </form>
+    </div>
+  </div>
+</div>

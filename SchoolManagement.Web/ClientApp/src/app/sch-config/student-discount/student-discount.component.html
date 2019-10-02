@@ -1,0 +1,95 @@
+<div class="student-type-container">
+  <button mat-fab (click)="add()" color="primary">
+    <mat-icon class="mat-18">add</mat-icon>
+  </button>
+  <mat-table class="mat-elevation-z8" [dataSource]="studentFeeDiscount">
+    <ng-container matColumnDef="studenttype">
+      <mat-header-cell *matHeaderCellDef> Student Type </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.StudentType}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="feetype">
+      <mat-header-cell *matHeaderCellDef> Fee Type </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.FeeType}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.Amount}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.Status}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-mini-fab (click)="edit(row)" color="primary">
+          <mat-icon class="mat-18">edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-mini-fab (click)="delete(row)" color="primary">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayColumn"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumn"></mat-row>
+  </mat-table>
+</div>
+<ng-template #addEditDiscount>
+  <h2 mat-dialog-title>{{title}}</h2>
+  <mat-dialog-content>
+    <form [formGroup]="addEditForm">
+      <mat-form-field>
+        <mat-select placeholder="Student Type" formControlName="studenttype" #studentTypeSelect="matSelect" required>
+          <mat-option *ngFor="let stuType of studentType" [value]="stuType.Id">
+            {{ stuType.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="addEditForm.controls['studenttype'].hasError('required')">
+          Student Type is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Fee Type" formControlName="feetype" #feeTypeSelect="matSelect" required>
+          <mat-option *ngFor="let feetype of feeTypes" [value]="feetype.Id">
+            {{ feetype.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="addEditForm.controls['feetype'].hasError('required')">
+          Status is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Amount" formControlName="amount" type="text" required>
+        <mat-error *ngIf="addEditForm.controls['amount'].hasError('required')">
+          Amount is
+          <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="addEditForm.controls['amount'].hasError('pattern')">
+          Please enter a valid amount
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+          <mat-option *ngFor="let status of statusList" [value]="status.Id">
+            {{ status.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="addEditForm.controls['status'].hasError('required')">
+          Status is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button (click)="save()">Save</button>
+  </mat-dialog-actions>
+</ng-template>

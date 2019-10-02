@@ -1,0 +1,30 @@
+<mat-toolbar class="toolbar-container mat-elevation-z4">
+  <a mat-button routerLink="/">Home</a>
+  <a mat-button>About</a>
+  <button mat-button [matMenuTriggerFor]="admission">Admission</button>
+  <mat-menu #admission="matMenu" [overlapTrigger]="false">
+    <a mat-menu-item routerLink="/admission/admission">Admission</a>
+    <a mat-menu-item routerLink="/admission/readmission">Re-admission</a>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="finance">Finance</button>
+  <mat-menu #finance="matMenu" [overlapTrigger]="false">
+    <a mat-menu-item routerLink="/finance/fee">Fee</a>
+    <a mat-menu-item routerLink="/finance/account">Account</a>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="config">Configuration</button>
+  <mat-menu #config="matMenu" [overlapTrigger]="false">
+    <a mat-menu-item routerLink="/config/class">Class</a>
+    <a mat-menu-item routerLink="/config/fee">Fee</a>
+    <a mat-menu-item routerLink="/config/bus">Bus</a>
+    <a mat-menu-item routerLink="/config/user">User</a>
+    <a mat-menu-item routerLink="/config/studenttype">Student Type</a>
+    <a mat-menu-item routerLink="/config/studentdiscount">Student Discount</a>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="report">Report</button>
+  <mat-menu #report="matMenu" [overlapTrigger]="false">
+    <a mat-menu-item routerLink="/report/feereport">Fee</a>
+    <a mat-menu-item routerLink="/report/studentreport">Student</a>
+    <!-- <a mat-menu-item routerLink="/report/admissionreport">Admission</a> -->
+  </mat-menu>
+  <a mat-button>Contact Us</a>
+</mat-toolbar>

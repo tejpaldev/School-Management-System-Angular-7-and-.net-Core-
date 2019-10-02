@@ -1,0 +1,19 @@
+<div class="menu-container">
+  <button mat-fab [matMenuTriggerFor]="mainMenu" color="primary">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mainMenu="matMenu">
+    <button mat-menu-item (click)="feeCollect()">Fee Collection</button>
+    <button mat-menu-item (click)="feeDefaulter()">Fee Defaulter</button>
+  </mat-menu>
+</div>
+<div class="filter-container">
+  <div class="filter">
+    <school-report-filter [filterRender]="fieldList" (reportFilter)="filters($event)"></school-report-filter>
+  </div>
+  <h4>{{errorMsg}}</h4>
+</div>
+<div class="report-container">
+  <school-fee-collection *ngIf="isFeeCollection && filter" [filter]="filter"></school-fee-collection>
+  <school-fee-defaulter *ngIf="isDefaulter && filter" [filter]="filter"></school-fee-defaulter>
+</div>

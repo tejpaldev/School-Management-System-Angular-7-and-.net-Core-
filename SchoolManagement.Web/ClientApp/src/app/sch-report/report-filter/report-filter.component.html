@@ -1,0 +1,45 @@
+<form class="report-form" (submit)="filter()" [formGroup]="filterForm">
+  <mat-form-field *ngIf="fieldList.IsAdmission">
+    <input matInput placeholder="Admission Number" formControlName="admissionno">
+    <!-- <mat-error *ngIf="filterForm.controls['admissionno'].hasError('required')">
+          Please enter a valid Aadhar no
+        </mat-error> -->
+  </mat-form-field>
+  <mat-form-field *ngIf="fieldList.IsName">
+    <input matInput placeholder="Student Name" formControlName="studentname">
+  </mat-form-field>
+  <mat-form-field *ngIf="fieldList.IsFromDate">
+    <input matInput [matDatepicker]="fromdatepicker" placeholder="From Date" formControlName="fromdate" readonly="true">
+    <mat-datepicker-toggle matSuffix [for]="fromdatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #fromdatepicker disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field *ngIf="fieldList.IsToDate">
+    <input matInput [matDatepicker]="todatepicker" placeholder="To Date" formControlName="todate" readonly="true">
+    <mat-datepicker-toggle matSuffix [for]="todatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #todatepicker disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field *ngIf="fieldList.IsFeeType">
+    <mat-select multiple placeholder="Fee Type" formControlName="feetype" #feeTypeSelect="matSelect">
+      <mat-option *ngFor="let feeType of feeTypes" [value]="feeType.Id">
+        {{ feeType.Name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="fieldList.IsClass">
+    <mat-select multiple placeholder="Class" formControlName="class" (selectionChange)="classChanged()" #classSelect="matSelect">
+      <mat-option *ngFor="let class of classes" [value]="class.Id">
+        {{ class.Name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="fieldList.IsSection">
+    <mat-select multiple placeholder="Section" formControlName="section" #sectionSelect="matSelect">
+      <mat-option *ngFor="let section of sections" [value]="section.Id">
+        {{ section.Name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <button mat-raised-button type="submit" color="primary">Filter</button>
+  </div>
+</form>

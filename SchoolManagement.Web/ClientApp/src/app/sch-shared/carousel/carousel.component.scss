@@ -1,0 +1,78 @@
+.carousel-wrapper {
+  display: flex;
+  flex-direction: row;
+  .slide-wrapper {
+    overflow: hidden;
+    .carousel-inner {
+      display: flex;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 6000px;
+    }
+  }
+  .carousel-control {
+    position: absolute;
+    height: 69vh;
+    width: 100%;
+    display: flex;
+    .left {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      a {
+        color: #fff;
+        cursor: pointer;
+        &:hover {
+          color: greenyellow;
+        }
+      }
+    }
+    .right {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      a {
+        color: #fff;
+        cursor: pointer;
+        align-self: flex-end;
+        &:hover {
+          color: greenyellow;
+        }
+      }
+    }
+    .center {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      .carousel-indicators {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        li {
+          cursor: pointer;
+          margin: 10px;
+          color: #fff;
+          &:before {
+            content: "·";
+            font-size: 80px;
+            vertical-align: middle;
+            line-height: 20px;
+          }
+          &:hover {
+            color: greenyellow;
+          }
+        }
+        .active {
+          color: greenyellow;
+        }
+      }
+    }
+  }
+}

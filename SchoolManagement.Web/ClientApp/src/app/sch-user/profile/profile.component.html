@@ -1,0 +1,119 @@
+<mat-horizontal-stepper [linear]="isLinear" #profileStepper>
+  <mat-step [stepControl]="profileFormGroup">
+    <form [formGroup]="profileFormGroup" (ngSubmit)="profileSave()">
+      <ng-template matStepLabel>Fill out your profile deails</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="First name" formControlName="firstName" required>
+        <mat-error *ngIf="profileFormGroup.controls['firstName'].hasError('pattern')">
+          Please enter a valid first name
+        </mat-error>
+        <mat-error *ngIf="profileFormGroup.controls['firstName'].hasError('required')">
+          First name is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Middle name" formControlName="middleName">
+        <mat-error *ngIf="profileFormGroup.controls['middleName'].hasError('pattern')">
+          Please enter a valid middle name
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last name" formControlName="lastName" required>
+        <mat-error *ngIf="profileFormGroup.controls['lastName'].hasError('pattern')">
+          Please enter a valid last name
+        </mat-error>
+        <mat-error *ngIf="profileFormGroup.controls['lastName'].hasError('required')">
+          Last name is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dateOfBirth" required disabled>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+          <mat-error *ngIf="profileFormGroup.controls['dateOfBirth'].hasError('required')">
+            Date of birth is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Gender" formControlName="gender" required #genderSelect="matSelect">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{ gender.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="profileFormGroup.controls['gender'].hasError('required')">
+            Gender is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button type="submit">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="userFormGroup">
+    <form [formGroup]="userFormGroup" (ngSubmit)="userSave()">
+      <ng-template matStepLabel>Fill out your contact</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Email address" formControlName="email" required>
+        <mat-error *ngIf="userFormGroup.controls['email'].hasError('pattern')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="userFormGroup.controls['email'].hasError('required')">
+          Email address is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <mat-form-field class="country-code">
+          <input matInput readonly value="+91">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Contact" formControlName="contact" required>
+          <mat-hint align="end">{{userFormGroup.controls['contact'].value.length}} / 10</mat-hint>
+          <mat-error *ngIf="userFormGroup.controls['contact'].hasError('pattern')">
+            Please enter a valid mobile number
+          </mat-error>
+          <mat-error *ngIf="userFormGroup.controls['contact'].hasError('required')">
+            Mobile number is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button type="submit">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>
+      <label>{{profileFormGroup.controls['firstName'].value}}</label>
+      <label>{{profileFormGroup.controls['middleName'].value}}</label>
+      <label>{{profileFormGroup.controls['lastName'].value}}</label>
+    </p>
+    <p>
+      <label>{{profileFormGroup.controls['dateOfBirth'].value}}</label>
+    </p>
+    <p>
+      <label>{{ genderSelect.selected?.viewValue }}</label>
+    </p>
+    <p>
+      <label>{{userFormGroup.controls['email'].value}}</label>
+    </p>
+    <p>
+      <label>{{userFormGroup.controls['contact'].value}}</label>
+    </p>
+    <div>
+      <button mat-button matStepperPrevious type="button">Back</button>
+      <button mat-button type="button">Done</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

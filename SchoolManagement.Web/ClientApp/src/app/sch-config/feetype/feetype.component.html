@@ -1,0 +1,67 @@
+<div class="feetype-container mat-elevation-z8">
+  <form [formGroup]="feetypeAddForm" *ngIf="option.IsAdd" (ngSubmit)="add()">
+    <mat-form-field>
+      <input matInput placeholder="Fee Type Name" formControlName="name" required>
+      <mat-error *ngIf="feetypeAddForm.controls['name'].hasError('pattern')">
+        Please enter a valid Fee Type name
+      </mat-error>
+      <mat-error *ngIf="feetypeAddForm.controls['name'].hasError('required')">
+        Fee Type name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="description">
+      <input matInput placeholder="Fee Type Description" formControlName="description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Feeperiod" formControlName="feeperiod" #feeperiodSelect="matSelect" required>
+        <mat-option *ngFor="let feeperiod of feeperiodList" [value]="feeperiod.Id">
+          {{ feeperiod.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="feetypeAddForm.controls['feeperiod'].hasError('required')">
+        Fee Period is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+        <mat-option *ngFor="let status of statusList" [value]="status.Id">
+          {{ status.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="feetypeAddForm.controls['status'].hasError('required')">
+        Status is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add</button>
+  </form>
+  <!-- feetype-table *ngIf="option.IsDelete" -->
+  <div *ngIf="option.IsDelete">
+    <mat-table class="feetype-table" #table1 [dataSource]="feetypeSource">
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="delete(row.Id)" color="primary">Delete</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="period">
+        <mat-header-cell *matHeaderCellDef>Fee Period</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.FeePeriod }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Description }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Name }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columnsDisplayed"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsDisplayed;"></mat-row>
+    </mat-table>
+    <mat-paginator [length]="totalLength" [pageSize]="10">
+    </mat-paginator>
+  </div>
+</div>

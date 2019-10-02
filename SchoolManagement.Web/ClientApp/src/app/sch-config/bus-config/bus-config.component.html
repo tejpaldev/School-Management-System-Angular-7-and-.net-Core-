@@ -1,0 +1,61 @@
+<div class="bus-config-container">
+  <button mat-fab [matMenuTriggerFor]="mainMenu" color="primary">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mainMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="locationMenu">Location</button>
+    <button mat-menu-item [matMenuTriggerFor]="busrouteMenu">Bus Route</button>
+    <a mat-menu-item [routerLink]="['/config']">
+      <mat-icon>keyboard_backspace</mat-icon>
+      <span>Back</span>
+    </a>
+  </mat-menu>
+  <mat-menu #locationMenu="matMenu">
+    <button mat-menu-item (click)="addLocation()">
+      <mat-icon>add</mat-icon>
+      <span>Add Location</span>
+    </button>
+    <button mat-menu-item (click)="editLocationSearch()">
+      <mat-icon>mode_edit</mat-icon>
+      <span>Edit Location</span>
+    </button>
+  </mat-menu>
+  <mat-menu #busrouteMenu="matMenu">
+    <button mat-menu-item (click)="addBusroute()">
+      <mat-icon>add</mat-icon>
+      <span>Add Bus Route</span>
+    </button>
+    <button mat-menu-item (click)="editBusrouteSearch()">
+      <mat-icon>mode_edit</mat-icon>
+      <span>Edit Bus Route</span>
+    </button>
+  </mat-menu>
+  <form class="mat-elevation-z8" [formGroup]="locationSearchForm" *ngIf="isLocationEdit">
+    <mat-form-field>
+      <input matInput placeholder="Location Name" formControlName="locationname">
+      <mat-error *ngIf="locationSearchForm.controls['locationname'].hasError('pattern')">
+        Please enter a valid Location Name
+      </mat-error>
+      <mat-error *ngIf="locationSearchForm.controls['locationname'].hasError('required')">
+        Location Name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button (click)="editLocation()" color="primary">Search</button>
+  </form>
+  <form class="mat-elevation-z8" [formGroup]="busrouteSearchForm" *ngIf="isBusrouteEdit">
+    <mat-form-field>
+      <input matInput placeholder="Bus Route Name" formControlName="busroutename">
+      <mat-error *ngIf="busrouteSearchForm.controls['busroutename'].hasError('pattern')">
+        Please enter a valid Bus Route Name
+      </mat-error>
+      <mat-error *ngIf="busrouteSearchForm.controls['busroutename'].hasError('required')">
+        Bus Route Name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button (click)="editBusroute()" color="primary">Search</button>
+  </form>
+  <school-location *ngIf="isLocation" [option]="locationOption"></school-location>
+  <school-busroute *ngIf="isBusroute" [option]="busrouteOption"></school-busroute>
+</div>

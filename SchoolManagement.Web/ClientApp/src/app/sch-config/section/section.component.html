@@ -1,0 +1,53 @@
+<div class="section-container">
+  <div *ngIf="isSectionAdd" class="mat-elevation-z8">
+    <form [formGroup]="addSectionForm" (ngSubmit)="addSection()">
+      <mat-form-field>
+        <input matInput placeholder="Section Name" formControlName="name" type="text" required>
+        <mat-error *ngIf="addSectionForm.controls['name'].hasError('required')">
+          Class name is
+          <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="addSectionForm.controls['name'].hasError('pattern')">
+          Please enter a valid Class name
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Status" formControlName="status" #statusSelect="matSelect" required>
+          <mat-option *ngFor="let status of statusList" [value]="status.Id">
+            {{ status.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="addSectionForm.controls['status'].hasError('required')">
+          Status is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button type="submit" color="primary">Add</button>
+    </form>
+  </div>
+  <div *ngIf="isSectionDelete" class="mat-elevation-z8">
+    <mat-table #table [dataSource]="sectionDataSource">
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="deleteSection(row.Id)" color="primary">Delete</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Section Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.Description }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [length]="totalLength" [pageSize]="10">
+    </mat-paginator>
+  </div>
+</div>
